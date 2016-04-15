@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="jainsaab.proto2.MainActivity$PlaceholderFragment"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="HOME"
+        android:textAlignment="center"
+        android:textSize="@dimen/activity_vertical_margin"
+        android:padding="30dp"
+        android:textColor="#000000"
+        android:textStyle="bold" />
+    <Button
+        android:id="@+id/buttonProfile"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="PROFILE"/>
+    <Button
+        android:id="@+id/buttonBalance"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="BALANCE"/>
+    <Button
+        android:id="@+id/buttonSchedule"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="SCHEDULE"/>
+
+    <Button
+        android:id="@+id/buttonBet"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="BET"/>
+    <Button
+        android:id="@+id/buttonLeaderboard"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="LEADERBOARD"/>
+
+</LinearLayout>

@@ -35,7 +35,7 @@ public class LeaderboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_leaderboard);
         Intent intent = getIntent();
 
-        Log.d(logtag,"boom1");
+        //Log.d(logtag,"boom1");
         String message = "On Leaderboard screen";
         TextView textView = new TextView(this);
         //textView.setTextSize(40);
@@ -49,13 +49,12 @@ public class LeaderboardActivity extends AppCompatActivity {
         try {
             reader = new BufferedReader(
                     new InputStreamReader(getAssets().open("schedule.txt")));
-            Log.d("boom2","boom2");
-            // do reading, usually loop until end of file reading
+            //Log.d("boom2","boom2");
             String mLine;
             String fullLine = "";
             while ((mLine = reader.readLine()) != null) {
                 fullLine = fullLine + mLine;
-                Log.d(logtag,fullLine);
+               // Log.d(logtag,fullLine);
             }
             textView.setText(fullLine);
         } catch (IOException e) {

@@ -1,18 +1,23 @@
 package jainsaab.proto2;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 
 public class BetActivity extends AppCompatActivity {
@@ -98,10 +103,12 @@ public class BetActivity extends AppCompatActivity {
         sdf1.setTimeZone(TimeZone.getTimeZone("IST"));
         String myDate = sdf1.format(new Date());
         Log.d("date",myDate);
+
         SimpleDateFormat sdf2 = new SimpleDateFormat("MM");
         sdf2.setTimeZone(TimeZone.getTimeZone("IST"));
         String myMonth = sdf2.format(new Date());
         Log.d("month",myMonth);
+
         String myTeamA1 = "";  // 4 pm match
         String myTeamA2 = "";
         String myTimeA  = "";
@@ -111,15 +118,15 @@ public class BetActivity extends AppCompatActivity {
         String myTimeB  = "";
 
         if (myMonth.equals("04"))
-            Log.d("matched month",myMonth);
+            //Log.d("matched month",myMonth);
         if (myDate.equals("16"))
-            Log.d("matched date",myDate);
+            //Log.d("matched date",myDate);
         for (int i=0; i < 56; i++)
             if (myMonth.equals(myScheduleArray[i][0])){  // match current month
-                Log.d("matched month",myMonth);
+               // Log.d("matched month",myMonth);
                 for (int j=1; j < 5; j++)
                     if(myDate.equals(myScheduleArray[i][j])){  // match current day
-                        Log.d("matched date",myDate);
+                 //       Log.d("matched date",myDate);
                         if ((myScheduleArray[i][2]).equals("04")){ // 4pm match
                             myTeamA1 = myScheduleArray[i][3];
                             myTeamA2 = myScheduleArray[i][4];
@@ -135,7 +142,7 @@ public class BetActivity extends AppCompatActivity {
 
         String matchA = "";
         if(myTeamA1.isEmpty())
-            matchA = "";
+            matchA = "No Match at 4PM today";
         else matchA = (myTimeA.concat("   ").concat(myTeamA1).concat(" vs ").concat(myTeamA2));
         String matchB = (myTimeB.concat("   ").concat(myTeamB1).concat(" vs ").concat(myTeamB2));
 
@@ -149,10 +156,45 @@ public class BetActivity extends AppCompatActivity {
         String[] items = new String[]{myTeamA1,myTeamA2}; //{"MI", "RPS", "KKR", "DD", "KXIP",  "GL", "RCB", "SRH"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
+        //dropdown.setOnItemSelectedListener(new onItem);
 
         Spinner dropdown2 = (Spinner)findViewById(R.id.spinner2);
         String[] items2 = new String[]{myTeamB1,myTeamB2};//{"MI", "RPS", "KKR", "DD", "KXIP",  "GL", "RCB", "SRH"};
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items2);
         dropdown2.setAdapter(adapter2);
+
+        SimpleDateFormat sdf3 = new SimpleDateFormat("HH");
+        sdf3.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
+        String myTime = sdf3.format(new Date());
+        Log.d("Current time",myTime);
+
+
+        Switch sw1 = (Switch)findViewById(R.id.switch1);  // matchA
+        sw1.setOnClickListener(lockSw1);
+        //sw1.set
+        Switch sw2 = (Switch)findViewById(R.id.switch2); //matchB
+        sw2.setOnClickListener(lockSw2);
+
+        if(myTime.equals("15"))  // disable switch for 1 hr before the match
+            sw1.setEnabled(false);
+        if(myTime.equals("21"))
+            sw2.setEnabled(false);
+
     }
+
+    private View.OnClickListener lockSw1 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(BetActivity.this, "Locked choice 1", Toast.LENGTH_LONG).show();
+
+        }
+    };
+
+    private View.OnClickListener lockSw2 =  new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(BetActivity.this, "Locked choice 2", Toast.LENGTH_LONG).show();
+        }
+    };
+
 }

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Proto2</string>
-    <string name="match1_4pm">Match1 4pm</string>
+    <string name="myLocalFile">foo</string>
     <string name="match2_8pm">Match2 8pm</string>
+
 
 </resources>
